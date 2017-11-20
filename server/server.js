@@ -39,14 +39,17 @@ app.get('/todos/:id', (req, res) => {
     }
 
     Todo.findById(_id).then((todo)=>{
+        if(!todo){
+            return res.status(404).send({errorMessage: 'Todo not found'});        
+        }
         res.status(200).send({todo});
     }, (e) => {
-        return res.status(404).send({errorMessage: 'Todo not found'});
+        return res.status(400);
     });
 });
 
 app.listen(3000, () => {
-    console.log('Started on port 3000');
+    console.log('Started on port 3001');
 });
 
 module.exports = {app};
