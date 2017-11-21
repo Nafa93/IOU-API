@@ -75,7 +75,7 @@ describe('GET /todos', () => {
 });
 
 describe('GET /todos/:id', () => {
-    it('should return a todo by id', (done) => {
+    it('should return todo doc', (done) => {
         request(app)
             .get(`/todos/${todos[0]._id.toHexString()}`)
             .expect(200)
@@ -97,7 +97,7 @@ describe('GET /todos/:id', () => {
             .end(done);
     });
 
-    it('should return 400 if invalid id', (done) => {
+    it('should return 400 for non-object ids', (done) => {
         var id = new ObjectID();
 
         request(app)
