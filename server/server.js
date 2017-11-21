@@ -44,9 +44,22 @@ app.get('/todos/:id', (req, res) => {
             return res.status(404).send({errorMessage: 'Todo not found'});        
         }
         res.status(200).send({todo});
-    }, (e) => {
-        return res.status(400);
-    });
+    }).catch((e) => res.status(400).send());
+});
+
+app.delete('/todos/:id', (req, res) => {
+    var _id = req.params.id;
+
+    if(!ObjectID.isValid(_id)){
+        return res.status(400).send({errorMessage: 'This is an invalid ID'});
+    }
+
+    Todo.findByIdAndRemove(_id).then((todo) => {
+        if(!todo){
+            return res.status(404).send({errorMessage: 'Todo not found'});                    
+        }
+        res.status(200).send({todo});        
+    }).catch((e) => res.status(400).send());
 });
 
 app.listen(port, () => {
