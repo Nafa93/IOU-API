@@ -166,16 +166,29 @@ describe('PATCH /todos/:id', ()=> {
 
         request(app)
             .patch(`/todos/${_id}`)
-            .send({completed: true. text})
+            .send({completed: true, text})
             .expect(200)
             .expect((res) => {
-                expect(res.body.completed).toBe(true);
-                expect(res.body.completedAt).toBeA('number');
+                expect(res.body.todo.text).toBe(text);
+                expect(res.body.todo.completed).toBe(true);
+                expect(res.body.todo.completedAt).toBeA('number');
             })
             .end(done);
     });
 
-    // it('should clear completedAt when todo is not completed', () => {
+    it('should clear completedAt when todo is not completed', (done) => {
+        var _id = todos[0]._id.toHexString();
+        var text = 'this should be the new test';
 
-    // });
+        request(app)
+            .patch(`/todos/${_id}`)
+            .send({completed: false, text})
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.todo.text).toBe(text);
+                expect(res.body.todo.completed).toBe(false);
+                expect(res.body.todo.completedAt).toNotExist();                
+            })
+            .end(done);
+    });
 });
