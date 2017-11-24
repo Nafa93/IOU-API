@@ -16,7 +16,6 @@ const port = process.env.PORT;
 app.use(bodyParser.json());
 
 app.post('/todos', (req, res) => {
-    console.log(req.body);
     var todo = new Todo({
         text: req.body.text
     });
@@ -111,7 +110,7 @@ app.get('/users/me', authenticate, (req, res) => {
         }
 
         res.send(user);
-    }).catch((e) => res.status(401).send());
+    }).catch((e) => res.status(401).send({}));
 });
 
 app.listen(port, () => {
