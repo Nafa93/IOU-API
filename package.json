@@ -31,5 +31,8 @@
     "mocha": "^3.0.2",
     "nodemon": "^1.10.2",
     "supertest": "^2.0.0"
+  },
+  "standard": {
+    "globals": [ "it", "describe", "beforeEach"]
   }
 }

@@ -1,8 +1,8 @@
-const bcrypt = require('bcryptjs');
-const {SHA256} = require('crypto-js');
-const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs')
+// const {SHA256} = require('crypto-js')
+// const jwt = require('jsonwebtoken')
 
-var password = '123abc!';
+var password = '123abc!'
 
 // bcrypt.genSalt(10, (err, salt) => {
 //     bcrypt.hash(password, salt, (err, hash) => {
@@ -10,11 +10,8 @@ var password = '123abc!';
 //     });
 // });
 
-var hashedPassword = '$2a$10$Iy594ap9uJ1.zDF57pl9XekqoHac27k.qZa5Tu.iGnex9NjIzO73y';
+var hashedPassword = '$2a$10$Iy594ap9uJ1.zDF57pl9XekqoHac27k.qZa5Tu.iGnex9NjIzO73y'
 
-bcrypt.compare(password, hashedPassword, (err, res) => {
-    console.log(res);
-});
 // var data = {
 //     id: 10
 // }
@@ -53,5 +50,12 @@ bcrypt.compare(password, hashedPassword, (err, res) => {
 // if(resultHash === token.hash){
 //     console.log('data was not changed');
 // } else {
-//     console.log('data was changed');    
+//     console.log('data was changed')
 // }
+
+bcrypt.compare(password, hashedPassword, (err, res) => {
+  if (err) {
+    return console.log('Something happened', err)
+  }
+  console.log(res)
+})
