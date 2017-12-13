@@ -1,6 +1,6 @@
 var env = process.env.NODE_ENV || 'development'
 
-console.log(process.env)
+console.log(process.env.TRAVIS)
 
 if (env === 'development' || env === 'test') {
   var config = require('./config.json')
