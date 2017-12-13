@@ -1,4 +1,7 @@
 language: node_js
 node_js:
   - "lts/*"
-after_success: npm run deploy
+deploy:
+  provider: heroku
+  api_key: 8d365814-38a8-4416-9f9d-fb6ebaf109f3
+  app: morning-bayou-40260
