@@ -122,7 +122,7 @@ app.post('/users/login', (req, res) => {
       res.header('x-auth', token).status(200).send(user)
     })
   }).catch((e) => {
-    res.status(400).send(e)
+    res.status(400).send(`${e}`)
   })
 })
 
