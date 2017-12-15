@@ -135,7 +135,11 @@ app.delete('/users/me/token', authenticate, (req, res) => {
 })
 
 app.listen(port, () => {
-  console.log(`Started up at port ${port}`)
+  if (port) {
+    console.log(`Started up at port ${port}`)
+  } else {
+    console.log('The application started')
+  }
 })
 
 module.exports = { app }
