@@ -255,10 +255,12 @@ describe('POST /users', () => {
   it('should create a user', (done) => {
     var email = 'example@example.com'
     var password = '123mnb!'
+    var name = 'Nicolas'
+    var lastName = 'Fernandez'
 
     request(app)
       .post('/users')
-      .send({ email, password })
+      .send({ email, password, name, lastName })
       .expect(201)
       .expect((res) => {
         expect(res.headers['x-auth']).toBeTruthy()
