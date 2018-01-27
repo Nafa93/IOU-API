@@ -7,6 +7,7 @@ const { ObjectID } = require('mongodb')
 var { mongoose } = require('./db/mongoose.js') // eslint-disable-line
 
 var { Todo } = require('./models/todo.js')
+var { Spending } = require('./models/spending.js')
 var { User } = require('./models/user.js')
 var { authenticate } = require('./middleware/authenticate')
 
@@ -17,6 +18,19 @@ app.use(bodyParser.json())
 
 app.post('/todos', authenticate, (req, res) => {
   var todo = new Todo({
+    text: req.body.text,
+    _creator: req.user._id
+  })
+
+  todo.save().then((doc) => {
+    res.status(201).send(doc)
+  }, (e) => {
+    res.status(400).send(e)
+  })
+})
+
+app.post('/spendings', authenticate, (req, res) => {
+  var spending = new Spending({
     text: req.body.text,
     _creator: req.user._id
   })
@@ -91,7 +105,7 @@ app.patch('/todos/:id', authenticate, (req, res) => {
 })
 
 app.post('/users', (req, res) => {
-  var body = _.pick(req.body, ['email', 'password'])
+  var body = _.pick(req.body, ['email', 'password', 'name', 'lastName'])
 
   var user = new User(body)
 
