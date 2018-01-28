@@ -20,7 +20,7 @@ var Spending = mongoose.model('Spending', {
     require
   },
   createdAt: {
-    type: Number,
+    type: Date,
     required: true
   },
   direct: {
